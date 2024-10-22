@@ -18,19 +18,19 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
-env.read_env(str(BASE_DIR / '.env')) ## yangi usul str qo'yish kerak ekan
-# env.read_env(os.path.join(BASE_DIR, '.env')) ### eski usul ham ishladi
+env.read_env(str(BASE_DIR / '.env')) ### yangi usul str qo'yish kerak ekan
+# env.read_env(os.path.join(BASE_DIR, '.env')) ### eski usul ham ishlaydi
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str(("SECRET_KEY", 'DEFAULT')) ## hech qanday tur bermasa str deb qabul qiladi str berilmasa
+SECRET_KEY = env.str("SECRET_KEY", "DEFAULT") ## hech qanday tur bermasa str deb qabul qiladi str berilmasa demoqchiman
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True ### env.bool("DEBUG", default=True)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"] ### env.list('ALLOWED_HOSTS', default=['localhost'])
 
 # Application definition
 
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    ### built in apps
+    ### built_in apps
     'query_counter',
     'ckeditor',
     'ckeditor_uploader',
@@ -84,12 +84,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+### auth user
 AUTH_USER_MODEL = 'user.User'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [ BASE_DIR / 'templates' ], ### or os.path.join(BASE_DIR, 'templates') bunda ham ishlaydi
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,10 +111,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+                    ### POSTGRES SQL 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'n_air',
+        'USER': 'n_air',
+        'PASSWORD': 'n_air',
+        'HOST': 'localhost', ### or '127.0.0.1'
+        'PORT': '5432',
     }
 }
 
@@ -191,6 +205,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+### ckeditor settings
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 CKEDITOR_UPLOAD_PATH = "uploads/"

@@ -5,6 +5,7 @@ import uuid
 
 class BaseModel(models.Model):
     # uuid
+    
     # uuid = models.UUIDField(
     #     primary_key=True,
     #     editable=False,

@@ -21,9 +21,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 
-### handler 404
+### handler 404 ni import qilish
 from django.conf.urls import handler404
+
 ### page_not_found ni chaqirish yoki to'g'ridan to'g'ri bersa ham bo'ladi
+
 '''
 config.errors.custom_page_not_found_page_view
 '''
@@ -32,8 +34,10 @@ config.errors.custom_page_not_found_page_view
 from .errors import custom_page_not_found_page_view
 
 urlpatterns = [
+    # admin panel
     path('n_air/', admin.site.urls),
 
+    ### ckeditor path
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     ### local path
@@ -42,12 +46,15 @@ urlpatterns = [
     path('', include('apps.contact.urls')),
     path('', include('apps.user.urls')),
 
+    ### re_path path (STATIC_ROOT va MEDIA_ROOT ni ko'rsatish uchun) DEBUG False bo'lsa faqat local da ishlaydi
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]
 
+### DEBUG False bo'lsa ushbu view ishga tushadi
 handler404 = custom_page_not_found_page_view
 
+### DEBUG True holatda (STATIC_ROOT va MEDIA_ROOT ni ko'rsatish uchun) faqat local uchun
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
