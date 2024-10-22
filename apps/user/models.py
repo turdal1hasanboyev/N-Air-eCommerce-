@@ -21,3 +21,7 @@ class User(AbstractUser, BaseModel):
         
         else:
             return f"{self.id}-{self.username}"
+        
+        ### elif o'rniga if ishlatsa ham bo'ladi
+
+        ## else: berish shart emas return ni to'g'ridan to'g'ri bersa ham bo'ladi
