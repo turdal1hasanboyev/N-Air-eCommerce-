@@ -4,12 +4,13 @@ import uuid
 
 
 class BaseModel(models.Model):
-    # uuid
+    
+    # uuid 4 bilan 
     
     # uuid = models.UUIDField(
     #     primary_key=True,
     #     editable=False,
-    #     default=uuid.uuid5,
+    #     default=uuid.uuid4,
     #     db_index=True,
     #     unique=True,
     # )

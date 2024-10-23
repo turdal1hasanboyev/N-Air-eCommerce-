@@ -11,3 +11,7 @@ Slug dokumentatsiya yozildi
 Get absolute url yozildi
 
 Template yozildi default!
+
+Bugun modellar yozamiz!
+
+Barcha modellar yozildi endi navbat views.py va urls.py ga

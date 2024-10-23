@@ -19,13 +19,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 env.read_env(str(BASE_DIR / '.env')) ### yangi usul str qo'yish kerak ekan
-# env.read_env(os.path.join(BASE_DIR, '.env')) ### eski usul ham ishlaydi
+# env.read_env(os.path.join(BASE_DIR, '.env')) ### eski usul bu ham ishlaydi
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str("SECRET_KEY", "DEFAULT") ## hech qanday tur bermasa str deb qabul qiladi str berilmasa demoqchiman
+SECRET_KEY = env.str("SECRET_KEY", None) ## hech qanday tur bermasa str deb qabul qiladi str berilmasa demoqchiman
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True ### env.bool("DEBUG", default=True)
@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'apps.contact',
 ]
 
+### django_query_counter settings
+
 DJANGO_QUERY_COUNTER = {
     'DQC_SLOWEST_COUNT': 5,
     'DQC_TABULATE_FMT': 'pretty',
@@ -78,7 +80,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    ### query_counter
+    ### query_counter_middleware
     'query_counter.middleware.DjangoQueryCounterMiddleware',
 ]
 
@@ -100,7 +102,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 ### global context
-                'config.global_context.object',
+                'config.global_context.object', ### global context ni ko'rsatib qo'yish
             ],
         },
     },
@@ -110,6 +112,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
+### Default sqlite3
 
 # DATABASES = {
 #     'default': {
@@ -206,6 +210,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ### ckeditor settings
+
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 CKEDITOR_UPLOAD_PATH = "uploads/"

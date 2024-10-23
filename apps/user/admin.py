@@ -5,7 +5,7 @@ from .models import User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = (
+    list_display = ( ### adminkada ko'rinadigan qismi
         "id",
         "get_full_name",
         "get_short_name",
