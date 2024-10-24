@@ -7,7 +7,7 @@
 <div class="head-bread">
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
             <li class="active">PRODUCTS</li>
         </ol>
     </div>
@@ -15,27 +15,29 @@
 <div class="products-gallery">
     <div class="container">
         <div class="col-md-9 grid-gallery">
+            {% for product in products %}
             <div class="col-md-4 grid-stn simpleCart_shelfItem">
                 <div class="ih-item square effect3 bottom_to_top">
                     <div class="bottom-2-top">
-                        <div class="img"><img src="images/grid4.jpg" alt="/" class="img-responsive gri-wid"></div>
+                        <div class="img"><img src="{{ product.image_1.url }}" alt="img" class="img-responsive gri-wid"></div>
                         <div class="info">
                             <div class="pull-left styl-hdn">
-                                <h3>style 01</h3>
+                                <h3>{{ product.name }}</h3>
                             </div>
                             <div class="pull-right styl-price">
-                                <p><a href="#" class="item_add"><span
-                                            class="glyphicon glyphicon-shopping-cart grid-cart"
-                                            aria-hidden="true"></span> <span class=" item_price">$190</span></a></p>
+                                <p><a href="{{ product.get_absolute_url }}" class="item_add"><span
+                                    class="glyphicon glyphicon-shopping-cart grid-cart"
+                                    aria-hidden="true"></span> <span class="item_price">{{ product.price_type }} {{ product.price }}</span></a></p>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
                 <div class="quick-view">
-                    <a href="single.html">Quick view</a>
+                    <a href="{% url 'product-detail' product.slug %}">Quick view</a>
                 </div>
             </div>
+            {% endfor %}
             <div class="clearfix"></div>
         </div>
         <div class="col-md-3 grid-details">

@@ -21,3 +21,5 @@ To'liq holatda backend yozildi
 Endi qilinadigan ish single va products.html fayllarini yozib chiqish
 
 Shu bilan loyiha tugaydi So'ngi tekshiruv amalga oshirilib proyekt yopiladi
+
+Loyiha tugallandi!

@@ -25,12 +25,12 @@ env.read_env(str(BASE_DIR / '.env')) ### yangi usul str qo'yish kerak ekan
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str("SECRET_KEY", None) ## hech qanday tur bermasa str deb qabul qiladi str berilmasa demoqchiman
+SECRET_KEY = env.str("SECRET_KEY", default=None) ## hech qanday tur bermasa str deb qabul qiladi str berilmasa demoqchiman
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True ### env.bool("DEBUG", default=True)
+DEBUG = env.bool("DEBUG", default=False) ## True False
 
-ALLOWED_HOSTS = ["*"] ### env.list('ALLOWED_HOSTS', default=['localhost'])
+ALLOWED_HOSTS = ["*"] ### env.list("ALLOWED_HOSTS", default=[]) # yoki "*"
 
 # Application definition
 
