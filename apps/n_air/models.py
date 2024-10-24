@@ -104,25 +104,6 @@ class Product(BaseModel):
 
         super().save(*args, **kwargs)
 
-    @property
-    def discount(self):
-        if self.percentage:
-            return self.price - (self.price * self.percentage) / 100
-        
-        return self.price
-    
-    ### else: bilan berish ham mumkin edi
-
-    '''
-    @property
-    def discount(self):
-        if self.percentage:
-            return self.price - (self.price * self.percentage) / 100
-
-        else:
-            return self.price
-    '''
-
     def __str__(self): ### obyekt qaytarish
         return f"{self.id}-{self.name}"
 

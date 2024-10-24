@@ -8,7 +8,8 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="/">Home</a></li>
-            <li><a href="#">Men</a></li>
+            <li><a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a></li>
+            {% comment %} templateda ichma ich kirish faqat . orqali boladi {% endcomment %}
             <li class="active">Shop</li>
         </ol>
     </div>
@@ -41,9 +42,9 @@
         <div class="col-md-4 showcase">
             <div class="showcase-rt-top">
                 <div class="pull-left shoe-name">
-                    <h3>Nike Air Max 2015</h3>
-                    <p>Men's running shoes</p>
-                    <h4>&#36;190</h4>
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.category.name }}</p>
+                    <h4>&#36;{{ product.price }}</h4>
                 </div>
                 <div class="pull-left rating-stars">
                     <ul>
@@ -160,13 +161,14 @@
 <div class="you-might-like">
     <div class="container">
         <h3 class="you-might">Products You May Like</h3>
+        {% for product in products %}
         <div class="col-md-4 grid-stn simpleCart_shelfItem">
             <div class="ih-item square effect3 bottom_to_top">
                 <div class="bottom-2-top">
                     <div class="img"><img src="images/grid4.jpg" alt="/" class="img-responsive gri-wid"></div>
                     <div class="info">
                         <div class="pull-left styl-hdn">
-                            <h3>style 01</h3>
+                            <h3>{{ product.name }}</h3>
                         </div>
                         <div class="pull-right styl-price">
                             <p><a href="#" class="item_add"><span class="glyphicon glyphicon-shopping-cart grid-cart"
@@ -180,6 +182,7 @@
                 <a href="single.html">Quick view</a>
             </div>
         </div>
+        {% endfor %}
         <div class="clearfix"></div>
     </div>
 </div>

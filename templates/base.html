@@ -1,10 +1,12 @@
 {% load static %}
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <title>N-Air</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords"
@@ -27,10 +29,14 @@
             <div class="header-top">
                 <div class="logo">
                     <a href="/">N-AIR</a>
+                    {% comment %} <a href="{% url 'home' %}">N-AIR</a> / bu eng bosh menyu degani {% endcomment %}
                 </div>
                 <div class="login-bars">
-                    <a class="btn btn-default log-bar" href="register.html" role="button">Sign Up</a>
-
+                    {% comment %} {% url 'path_name' dan foydalanish %} {% endcomment %}
+                    {% comment %} <a class="btn btn-default log-bar" href="{% url 'register' %}" role="button">Register</a> {% endcomment %}
+                    {% comment %} pathni o'zi bilan kirib borish usuli  {% endcomment %}
+                    <a class="btn btn-default log-bar" href="/register/" role="button">Register</a>
+                    {% comment %} faqat bittalik path larda ishlaydi ichma ich kirishda ishlamaydi (id, pk, slug bular bilan kirib bo'lmaydi){% endcomment %}
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -54,10 +60,18 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b
                                             class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="products.html">Shoes</a></li>
+                                        {% for category in categories %}
+                                        {% comment %} get_absolute_url orqali kirish hamma joyda bir hil ishlaydi {% endcomment %}
+                                        {% comment %} <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li> {% endcomment %}
+                                        {% comment %} {% url 'path_name' for obyekti blan kirish %} hamma joyda bir hil ishlaydi {% endcomment %}
+                                        <li><a href="{% url 'products' category.slug %}">{{ category.name }}</a></li>
+                                        {% endfor %}
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Catch</a></li>
+                                {% comment %} {% url 'path_name' %} bilan kirish istalgan joyda muammosiz ishlaydi {% endcomment %}
+                                {% comment %} <li><a href="{% url 'contact' %}">Contact Us</a></li> {% endcomment %}
+                                {% comment %} To'lliq path bo'yicha kirish faqat bittaliklarda hamma joyda muammosiz ishlaydi ichma ich kirishda (slug, id, pk)larda ishlamaydi{% endcomment %}
+                                <li><a href="/contact/">Contact Us</a></li>
                                 <div class="clearfix"></div>
                             </ul>
                             <div class="clearfix"></div>
@@ -79,13 +93,22 @@
             <div class="col-md-2 re-ft-grd">
                 <h3>Categories</h3>
                 <ul class="categories">
-                    <li><a href="#">Men</a></li>
+                    {% for cat in categories %}
+                    <li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+                    {% comment %} <li><a href="{% url 'products' cat.slug %}">{{ cat.name }}</a></li> {% endcomment %}
+                    {% comment %} Tepadagi ikki usul har doim bir maromda yaxshi ishlaydi hech qanday muammo bo'lmaydi {% endcomment %}
+                    {% comment %} <li><a href="/products/<slug:slug>/">{{ cat.name }}</a></li> bu usul umuman ishlamaydi bunday usul bilan kirib borish mumkin emas. Bu usul faqat bittalik kirishda ishlaydi hamma joyda hech qanday muammosiz {% endcomment %}
+                    {% comment %} <li><a href="/products/">{{ cat.name }}</a></li> bu usulda ishlaydi faqat {% endcomment %}
+                    {% endfor %}
                 </ul>
             </div>
             <div class="col-md-2 re-ft-grd">
                 <h3>Short links</h3>
                 <ul class="shot-links">
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="/">Home</a></li>
+                    {% comment %} <li><a href="{% url 'home' %}">Home</a></li> {% endcomment %}
+                    <li><a href="/contact/">Contact Us</a></li>
+                    {% comment %} <li><a href="{% url 'contact' %}">Contact Us</a></li> {% endcomment %}
                 </ul>
             </div>
             <div class="col-md-6 re-ft-grd">
@@ -100,7 +123,7 @@
             <div class="col-md-2 re-ft-grd">
                 <div class="bt-logo">
                     <div class="logo">
-                        <a href="index.html" class="ft-log">N-AIR</a>
+                        <a href="{% url 'home' %}" class="ft-log">N-AIR</a>
                     </div>
                 </div>
             </div>
@@ -108,7 +131,7 @@
         </div>
         <div class="copy-rt">
             <div class="container">
-                <p>&copy; 2022 N-AIR All Rights Reserved. Design by <a href="https://instagram.com/turdali.hasanboyev.07/">Turdali Hasanboyev</a></p>
+                <p>&copy; 2024 N-AIR All Rights Reserved. Design by <a href="https://instagram.com/turdali.hasanboyev.07/">Turdali Hasanboyev Instagram</a></p>
             </div>
         </div>
     </div>
